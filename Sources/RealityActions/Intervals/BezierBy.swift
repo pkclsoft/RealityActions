@@ -11,7 +11,7 @@ import RealityKit
 public class BezierBy: FiniteTimeAction {
     let bezierConfig: BezierConfig
     
-    public init (duration: Float, config: BezierConfig) {
+    public init (duration: TimeInterval, config: BezierConfig) {
         bezierConfig = config
         super.init(duration: duration)
     }
@@ -42,7 +42,7 @@ class BezierByState: FiniteTimeActionState {
         super.init (action: action, target: target)
     }
     
-    override func update(time: Float) {
+    override func update(time: Double) {
         guard let target else { return }
         
         let xa: Float = 0
@@ -60,9 +60,9 @@ class BezierByState: FiniteTimeActionState {
         let zc: Float = bezierConfig.controlPoint2.z
         let zd: Float = bezierConfig.endPosition.z
         
-        let x: Float = cubicBezier (a: xa, b: xb, c: xc, d: xd, t: time)
-        let y: Float = cubicBezier (a: ya, b: yb, c: yc, d: yd, t: time)
-        let z: Float = cubicBezier (a: za, b: zb, c: zc, d: zd, t: time)
+        let x: Float = cubicBezier (a: xa, b: xb, c: xc, d: xd, t: Float(time))
+        let y: Float = cubicBezier (a: ya, b: yb, c: yc, d: yd, t: Float(time))
+        let z: Float = cubicBezier (a: za, b: zb, c: zc, d: zd, t: Float(time))
         
         let currentPos = target.position
         let diff = currentPos - previousPosition

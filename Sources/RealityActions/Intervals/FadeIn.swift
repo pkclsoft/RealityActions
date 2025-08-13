@@ -10,7 +10,7 @@ import RealityKit
 
 // Extra action for making a Sequence or Spawn when only adding one action to it.
 class FadeIn: FiniteTimeAction {
-    public override init (duration: Float) {
+    public override init (duration: TimeInterval) {
         super.init(duration: duration)
         fatalError()
     }
@@ -29,8 +29,8 @@ class FadeInState: FiniteTimeActionState {
         super.init(action: action, target: target)
     }
     
-    override func step(dt: Float) {
+    override func step(dt: TimeInterval) {
     }
-    override func update(time: Float) {
+    override func update(time: Double) {
     }
 }

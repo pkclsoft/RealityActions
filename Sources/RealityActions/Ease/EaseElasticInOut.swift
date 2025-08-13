@@ -10,7 +10,7 @@ import RealityKit
 
 /// Easing function: elastic-in-and-then-out
 public class EaseElasticInOut: EaseElastic {
-    public override init (_ action: FiniteTimeAction, period: Float = 0.3) {
+    public override init (_ action: FiniteTimeAction, period: Double = 0.3) {
         super.init(action, period: period)
     }
     
@@ -24,14 +24,14 @@ public class EaseElasticInOut: EaseElastic {
 }
 
 class EaseElasticInOutState: ActionEaseState {
-    let period: Float
+    let period: Double
     
     init? (action: EaseElasticInOut, target: Entity) {
         period = action.period
         super.init(action: action, target: target)
     }
     
-    override func update(time: Float) {
+    override func update(time: Double) {
         innerActionState.update (time: elasticInOut (time: time, period: period))
     }
 }

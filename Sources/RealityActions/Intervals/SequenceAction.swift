@@ -35,7 +35,7 @@ public class SequenceAction: FiniteTimeAction {
     public init (_ actions: [FiniteTimeAction]) {
         var prev: FiniteTimeAction? = nil
         
-        var combinedDuration: Float = 0
+        var combinedDuration: TimeInterval = 0
         var count = 0
         for action in actions {
             if prev == nil {
@@ -84,7 +84,7 @@ class SequenceActionState: FiniteTimeActionState {
     let action1, action2: FiniteTimeAction
     var action1state, action2state: ActionState?
     let hasInfiniteAction: Bool
-    let split: Float
+    let split: TimeInterval
     var last: ActiveAction
     var id: Int
     
@@ -119,7 +119,7 @@ class SequenceActionState: FiniteTimeActionState {
         }
     }
     
-    override func step(dt: Float) {
+    override func step(dt: TimeInterval) {
         switch last {
         case .none:
             break
@@ -138,11 +138,11 @@ class SequenceActionState: FiniteTimeActionState {
 
     }
     
-    override func update(time: Float) {
+    override func update(time: Double) {
         guard let target else { return }
         var found: ActiveAction
         var foundState: ActionState?
-        var new_t: Float
+        var new_t: Double
         
         if time < split {
             found = .first

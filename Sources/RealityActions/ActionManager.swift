@@ -21,7 +21,7 @@ public class ActionManagerSystem : System {
 
 
     public func update(context: SceneUpdateContext) {
-        globalActionManager.update(dt: Float (context.deltaTime))
+        globalActionManager.update(dt: context.deltaTime)
     }
 }
 
@@ -80,7 +80,7 @@ public class ActionManager {
         return element.actionStates.count
     }
     
-    public func update(dt: Float) {
+    public func update(dt: Double) {
         guard targetsAvailable else { return }
         
         let keys = targets.keys

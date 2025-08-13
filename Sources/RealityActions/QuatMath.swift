@@ -8,11 +8,13 @@
 import Foundation
 import RealityKit
 
+/// Converts the incoming euler angles (in radians) to a quaternion.
+/// - Parameter angles: the euler angles in radians
+/// - Returns: the equivalent quaternian.
 func quaternionFromEuler (angles: SIMD3<Float>) -> simd_quatf {
-    let deg2radians2: Float = .pi / 360
-    let rangles = angles * deg2radians2
-    let s = sin (rangles)
-    let c = cos (rangles)
+    let halfAngles = angles / 2.0
+    let s = sin (halfAngles)
+    let c = cos (halfAngles)
     
     return simd_quatf (vector: [
         c.y * s.x * c.z + s.y * c.x * s.z,
@@ -22,6 +24,9 @@ func quaternionFromEuler (angles: SIMD3<Float>) -> simd_quatf {
     ])
 }
 
+/// Converts the input quaternian into euler angles (in radians).
+/// - Parameter quat: the quaternian to convert
+/// - Returns: the equivalent euler angles in radians
 func toEulerAngles (_ quat: simd_quatf) -> SIMD3<Float> {
     // Derivation from http://www.geometrictools.com/Documentation/EulerAngles.pdf
     // Order of rotations: Z first, then X, then Y
@@ -29,19 +34,17 @@ func toEulerAngles (_ quat: simd_quatf) -> SIMD3<Float> {
 
     let check: Float = 2.0*(-qv.y*qv.z + qv.w*qv.x);
     
-    let radToDeg: Float = 180.0 / .pi
-
     if check < -0.995 {
-        return SIMD3<Float> (-90, 0,
-                              -atan2f(2.0 * (qv.x * qv.z - qv.w * qv.y), 1.0 - 2.0 * (qv.y * qv.y + qv.z * qv.z)) * radToDeg)
+        return SIMD3<Float> (-.pi / 2.0, 0,
+                              -atan2f(2.0 * (qv.x * qv.z - qv.w * qv.y), 1.0 - 2.0 * (qv.y * qv.y + qv.z * qv.z)))
     } else if check > 0.995 {
-        return SIMD3<Float> (-90, 0,
-                              atan2f(2.0 * (qv.x * qv.z - qv.w * qv.y), 1.0 - 2.0 * (qv.y * qv.y + qv.z * qv.z)) * radToDeg)
+        return SIMD3<Float> (-.pi / 2.0, 0,
+                              atan2f(2.0 * (qv.x * qv.z - qv.w * qv.y), 1.0 - 2.0 * (qv.y * qv.y + qv.z * qv.z)))
     } else {
         return SIMD3<Float> (
-            asinf (check) * radToDeg,
-            atan2f(2.0 * (qv.x * qv.z + qv.w * qv.y), 1.0 - 2.0 * (qv.x * qv.x + qv.y * qv.y)) * radToDeg,
-            atan2f(2.0 * (qv.x * qv.y + qv.w * qv.z), 1.0 - 2.0 * (qv.x * qv.x + qv.z * qv.z)) * radToDeg)
+            asinf (check),
+            atan2f(2.0 * (qv.x * qv.z + qv.w * qv.y), 1.0 - 2.0 * (qv.x * qv.x + qv.y * qv.y)),
+            atan2f(2.0 * (qv.x * qv.y + qv.w * qv.z), 1.0 - 2.0 * (qv.x * qv.x + qv.z * qv.z)))
     }
 
 }

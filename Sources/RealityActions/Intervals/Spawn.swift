@@ -69,7 +69,7 @@ class SpawnState: FiniteTimeActionState {
         a2state?.stop()
         super.stop()
     }
-    override func update(time: Float) {
+    override func update(time: Double) {
         guard target != nil else { return }
         a1state?.update(time: time)
         a2state?.update(time: time)

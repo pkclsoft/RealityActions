@@ -11,7 +11,7 @@ import RealityKit
 /// Action to blink the target based on the duration
 public class Blink: FiniteTimeAction {
     let count: Int
-    public init (duration: Float, count: Int) {
+    public init (duration: TimeInterval, count: Int) {
         self.count = count
         super.init(duration: duration)
     }
@@ -35,10 +35,10 @@ class BlinkState: FiniteTimeActionState {
         super.init(action: action, target: target)
     }
     
-    override func update(time: Float) {
+    override func update(time: Double) {
         guard let target else { return }
         guard !isDone else { return }
-        let slice = 1.0 / Float(count)
+        let slice = 1.0 / Double(count)
         let m = fmod (time, slice)
         target.isEnabled = m > (slice/2)
     }

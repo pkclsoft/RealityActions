@@ -28,7 +28,7 @@ class AsyncSupportState: ActionInstantState {
         super.init(action: action, target: target)
     }
     
-    override func update(time: Float) {
+    override func update(time: Double) {
         if let cc = aas.cc {
             aas.cc = nil
             cc.resume()

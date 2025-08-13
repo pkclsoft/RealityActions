@@ -11,8 +11,8 @@ import RealityKit
 
 /// Base class for the EaseElastic easing function, use one of those.
 public class EaseElastic: ActionEase {
-    let period: Float
-    public init (_ action: FiniteTimeAction, period: Float = 0.3) {
+    let period: Double
+    public init (_ action: FiniteTimeAction, period: Double = 0.3) {
         self.period = period
         super.init(action)
     }
@@ -27,7 +27,7 @@ public class EaseElastic: ActionEase {
 }
 
 class EaseElasticState: ActionEaseState {
-    let period: Float
+    let period: Double
     init? (action: EaseElastic, target: Entity) {
         self.period = action.period
         super.init(action: action, target: target)

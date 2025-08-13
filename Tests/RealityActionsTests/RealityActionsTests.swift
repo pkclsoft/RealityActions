@@ -2,11 +2,16 @@ import XCTest
 @testable import RealityActions
 
 final class RealityActionsTests: XCTestCase {
-    func testExample() throws {
-        // XCTest Documentation
-        // https://developer.apple.com/documentation/xctest
-
-        // Defining Test Cases and Test Methods
-        // https://developer.apple.com/documentation/xctest/defining_test_cases_and_test_methods
+    
+    func testQuatMath() throws {
+        let euler : SIMD3<Float> = SIMD3<Float>(.pi, .pi * 1.5, .pi / 2.0)
+        
+        let quat = quaternionFromEuler(angles: euler)
+        
+        let result = toEulerAngles(quat)
+        
+        XCTAssertEqual(euler.x, result.x, accuracy: Float.ulpOfOne)
+        XCTAssertEqual(euler.y, result.y, accuracy: Float.ulpOfOne)
+        XCTAssertEqual(euler.z, result.z, accuracy: Float.ulpOfOne)
     }
 }

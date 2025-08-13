@@ -24,7 +24,7 @@ class RemoveSelfState: ActionInstantState {
         super.init(action: action, target: target)
     }
     
-    override func update(time: Float) {
+    override func update(time: Double) {
         guard let target else { return }
         target.parent?.removeChild(target)
     }

@@ -31,7 +31,7 @@ class CallState: ActionInstantState {
         super.init(action: action, target: target)
     }
     
-    override func update(time: Float) {
+    override func update(time: Double) {
         call.callback ()
     }
 }

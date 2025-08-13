@@ -11,10 +11,10 @@ import RealityKit
 /// Base class for actions that have a time duration.
 public class FiniteTimeAction: BaseAction {
     /// The duration for this action
-    public let duration: Float
+    public let duration: TimeInterval
     
-    public init (duration: Float) {
-        self.duration = max (Float.ulpOfOne, duration)
+    public init (duration: TimeInterval) {
+        self.duration = max (.ulpOfOne, duration)
     }
     
     /// Produces an action that is the reverse of the current action
@@ -29,8 +29,8 @@ public class FiniteTimeAction: BaseAction {
 
 class FiniteTimeActionState: ActionState {
     var firstTick: Bool
-    var duration: Float
-    var elapsed: Float
+    var duration: TimeInterval
+    var elapsed: TimeInterval
     
     override var isDone: Bool { elapsed >= duration }
     
@@ -41,7 +41,7 @@ class FiniteTimeActionState: ActionState {
         super.init(action: action, target: target)
     }
     
-    override func step (dt: Float) {
+    override func step (dt: TimeInterval) {
         if firstTick {
             firstTick = false
             elapsed = 0
@@ -49,6 +49,6 @@ class FiniteTimeActionState: ActionState {
             elapsed += dt
         }
         
-        update (time: max (0, min (1, elapsed / max (duration, Float.ulpOfOne))))
+        update(time: max (0.0, min (1.0, elapsed / max (duration, TimeInterval.ulpOfOne))))
     }
 }

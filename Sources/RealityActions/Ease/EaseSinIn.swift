@@ -28,7 +28,7 @@ class EaseSinInState: ActionEaseState {
         super.init(action: action, target: target)
     }
     
-    override func update(time: Float) {
+    override func update(time: Double) {
         innerActionState.update (time: sineIn (time: time))
     }
 }

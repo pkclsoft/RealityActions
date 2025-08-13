@@ -12,7 +12,7 @@ import RealityKit
 public class MoveBy: FiniteTimeAction {
     let delta: SIMD3<Float>
     
-    public init (duration: Float, delta: SIMD3<Float>) {
+    public init (duration: TimeInterval, delta: SIMD3<Float>) {
         self.delta = delta
         super.init(duration: duration)
     }
@@ -40,14 +40,10 @@ class MoveByState: FiniteTimeActionState {
         super.init(action: action, target: target)
     }
     
-    override func update(time: Float) {
+    override func update(time: Double) {
         guard let target else { return }
-        //let currentPos = target.position
-//        let diff = currentPos - previousPosition
-//        startPosition = diff + startPosition
-        
-        //print ("startPosition=\(startPosition) delta=\(delta) time=\(time)")
-        let newPos = startPosition + delta * time
+
+        let newPos = startPosition + delta * Float(time)
         target.position = newPos
         
         previousPosition = newPos

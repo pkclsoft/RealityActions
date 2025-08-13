@@ -14,7 +14,7 @@ import RealityKit
 public class MoveTo: MoveBy {
     var endPosition: SIMD3<Float>
     
-    public init (duration: Float, position: SIMD3<Float>) {
+    public init (duration: TimeInterval, position: SIMD3<Float>) {
         endPosition = position
         super.init(duration: duration, delta: position)
     }
@@ -30,10 +30,10 @@ class MoveToState: MoveByState {
         super.init(action: action, target: target, delta: positionDelta)
     }
     
-    override func update(time: Float) {
+    override func update(time: Double) {
         guard let target else { return }
         
-        let newPos = startPosition + delta * time
+        let newPos = startPosition + delta * Float(time)
         target.position = newPos
         previousPosition = newPos
     }

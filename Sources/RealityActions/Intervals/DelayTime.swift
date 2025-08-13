@@ -10,7 +10,7 @@ import RealityKit
 
 /// An action which completes after the specified time.
 public class DelayTime: FiniteTimeAction {
-    public override init (duration: Float) {
+    public override init (duration: TimeInterval) {
         super.init(duration: duration)
     }
     
@@ -28,6 +28,6 @@ class DelayTimeState: FiniteTimeActionState {
         super.init(action: action, target: target)
     }
     
-    override func update(time: Float) {
+    override func update(time: Double) {
     }
 }

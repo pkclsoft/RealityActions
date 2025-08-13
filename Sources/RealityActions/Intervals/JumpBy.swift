@@ -11,10 +11,10 @@ import RealityKit
 /// Moves a Node object simulating a parabolic jump movement by modifying it's position attribute.
 public class JumpBy: FiniteTimeAction {
     let jumps: Int
-    let height: Float
+    let height: Double
     let position: SIMD3<Float>
     
-    public init (duration: Float, position: SIMD3<Float>, height: Float, jumps: Int) {
+    public init (duration: TimeInterval, position: SIMD3<Float>, height: Double, jumps: Int) {
         self.jumps = jumps
         self.height = height
         self.position = position
@@ -45,11 +45,12 @@ class JumpByState: FiniteTimeActionState {
         super.init(action: action, target: target)
     }
     
-    override func update(time: Float) {
+    override func update(time: Double) {
         guard let target else { return }
-        let frac = fmod (time * Float (aj.jumps), 1)
-        let y = aj.height * 4 * frac * (1 - frac)
-        let delta: SIMD3<Float> = [delta.x * time, y * time, delta.z * time]
+        let fTime = Float(time)
+        let frac = fmod (time * Double (aj.jumps), 1)
+        let y = Float(aj.height * 4 * frac * (1 - frac))
+        let delta: SIMD3<Float> = [delta.x * fTime, y * fTime, delta.z * fTime]
         
         let currentPos = target.position
         
