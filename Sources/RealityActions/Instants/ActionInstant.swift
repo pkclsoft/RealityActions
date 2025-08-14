@@ -12,7 +12,8 @@ import RealityKit
 /// other classes like ``Call``, ``Hide``, ``Place``, ``RemoveSelf``,
 /// ``Show``, ``ToggleVisibility``
 public class ActionInstant: FiniteTimeAction {
-    init () {
+    
+    public init() {
         super.init(duration: 0)
     }
     
