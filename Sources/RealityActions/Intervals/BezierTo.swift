@@ -16,7 +16,7 @@ public class BezierTo: BezierBy {
     /// - Parameters:
     ///   - duration: How long will the transition take place
     ///   - config: Configuration specifying the two control points and the end position
-    public override init (duration: Float, config: BezierConfig) {
+    public override init (duration: TimeInterval, config: BezierConfig) {
         super.init(duration: duration, config: config)
     }
     

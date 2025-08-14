@@ -44,7 +44,7 @@ class ReverseTimeState: FiniteTimeActionState {
         otherState.stop()
     }
     
-    override func update(time: Float) {
+    override func update(time: Double) {
         otherState.update(time: 1-time)
     }
 }

@@ -21,7 +21,7 @@ public class Parallel: FiniteTimeAction {
     /// Creates a parallel action
     /// - Parameter actions: The nested actions that will be ran in parallel.
     public init (_ actions: [FiniteTimeAction]) {
-        var maxDuration: Float = 0
+        var maxDuration: TimeInterval = 0
         
         for action in actions {
             if action.duration > maxDuration {
@@ -57,6 +57,10 @@ public class Parallel: FiniteTimeAction {
     }
 }
 
+/// For those used to the SceneKit nomenclature, a Group is the same thing as a set of parallel actions.
+///
+public typealias Group = Parallel
+
 class ParallelState: FiniteTimeActionState {
     let ap: Parallel
     var actionStates: [ActionState]
@@ -78,7 +82,7 @@ class ParallelState: FiniteTimeActionState {
         super.stop()
     }
     
-    override func update(time: Float) {
+    override func update(time: Double) {
         for astate in actionStates {
             astate.update(time: time)
         }

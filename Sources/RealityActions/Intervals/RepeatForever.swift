@@ -51,7 +51,7 @@ class RepeatForeverState: FiniteTimeActionState {
         super.init(action: action, target: target)
     }
     
-    override func step(dt: Float) {
+    override func step(dt: TimeInterval) {
         guard let target else { return }
         innerActionState.step(dt: dt)
         if innerActionState.isDone {

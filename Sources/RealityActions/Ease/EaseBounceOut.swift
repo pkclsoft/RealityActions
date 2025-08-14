@@ -28,7 +28,7 @@ class EaseBounceOutState: ActionEaseState {
         super.init(action: action, target: target)
     }
     
-    override func update(time: Float) {
+    override func update(time: Double) {
         innerActionState.update (time: bounceOut (time: time))
     }
 }

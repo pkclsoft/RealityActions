@@ -32,11 +32,11 @@ class ActionInstantState: FiniteTimeActionState {
     
     override var isDone: Bool { true }
     
-    override func step(dt: Float) {
+    override func step(dt: TimeInterval) {
         update (time: 1)
     }
     
-    override func update(time: Float) {
+    override func update(time: Double) {
         // ignore
     }
 }

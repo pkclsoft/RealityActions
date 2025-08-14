@@ -16,12 +16,12 @@ public class ScaleBy: ScaleTo {
     /// - Parameters:
     ///   - duration: The duration for the scaling process
     ///   - scale: The delta for the scale operation
-    public override init (duration: Float, scale: SIMD3<Float>) {
+    public override init (duration: TimeInterval, scale: SIMD3<Float>) {
         self.scale = scale
         super.init(duration: duration, scale: scale)
     }
     
-    public convenience init (duration: Float, scale: Float) {
+    public convenience init (duration: TimeInterval, scale: Float) {
         self.init (duration: duration, scale: SIMD3<Float> (scale, scale, scale))
     }
     

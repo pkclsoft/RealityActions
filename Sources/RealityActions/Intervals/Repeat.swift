@@ -26,7 +26,7 @@ public class Repeat: FiniteTimeAction {
         } else {
             self.count = count
         }
-        super.init (duration: action.duration * Float (count))
+        super.init (duration: action.duration * Double (count))
     }
     
     override func startAction(target: Entity) -> ActionState? {
@@ -41,7 +41,7 @@ public class Repeat: FiniteTimeAction {
 class RepeatState: FiniteTimeActionState {
     let ra: Repeat
     var total: Int
-    var nextDt: Float
+    var nextDt: Double
     var innerActionState: FiniteTimeActionState
     
     init(action: Repeat, target: Entity) {
@@ -60,7 +60,7 @@ class RepeatState: FiniteTimeActionState {
     // legacy comment, predates CocosSharp:
     // issue #80. Instead of hooking step:, hook update: since it can be called by any
     // container action like Repeat, Sequence, AelDeel, etc..
-    override func update(time: Float) {
+    override func update(time: Double) {
         guard let target else { return }
         if time > nextDt {
             while time > nextDt && ra.count < total {
@@ -69,7 +69,7 @@ class RepeatState: FiniteTimeActionState {
                 
                 innerActionState.stop ()
                 innerActionState = ra.innerAction.startAction (target: target) as! FiniteTimeActionState
-                nextDt = ra.innerAction.duration / duration * Float (total+1)
+                nextDt = ra.innerAction.duration / duration * Double (total+1)
             }
             
             // LEGACY COMMENT fix for issue #1288, incorrect end value of repeat
@@ -88,7 +88,7 @@ class RepeatState: FiniteTimeActionState {
                 }
             }
         } else {
-            innerActionState.update(time: fmod (time * Float (ra.count), 1.0))
+            innerActionState.update(time: fmod (time * Double (ra.count), 1.0))
         }
     }
 }

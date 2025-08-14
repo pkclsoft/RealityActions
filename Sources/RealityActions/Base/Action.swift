@@ -50,14 +50,14 @@ class ActionState {
     
     /// Called every frame with it's delta time.
     /// - Parameter dt: Delta time
-    func step (dt: Float) {
+    func step (dt: TimeInterval) {
         
     }
     
     /// Called once per frame.
     /// - Parameter time: A value between 0 and 1; 0 means that the action just started, 0.5 means the action is in the middle; 1 means the action is over
     ///
-    func update (time: Float) {
+    func update (time: Double) {
         
     }
 }

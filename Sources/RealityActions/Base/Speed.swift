@@ -10,7 +10,7 @@ import RealityKit
 
 /// Changes the speed by which the nested action is executed
 public class Speed: BaseAction {
-    public var speedFactor: Float
+    public var speedFactor: Double
     
     var innerAction: FiniteTimeAction
     
@@ -19,7 +19,7 @@ public class Speed: BaseAction {
     ///   - action: Action that will be sped up
     ///   - speedFactor: factor by which time is modified.   For example, the value 2 makes things go twice as fast,
     ///   while the value .1 makes things ten times slower
-    public init (action: FiniteTimeAction, speedFactor: Float) {
+    public init (action: FiniteTimeAction, speedFactor: Double) {
         innerAction = action
         self.speedFactor = speedFactor
     }
@@ -35,7 +35,7 @@ public class Speed: BaseAction {
 
 class SpeedState: ActionState
 {
-    var speed: Float
+    var speed: Double
     var innerActionState: FiniteTimeActionState
     
     override var isDone: Bool {
@@ -57,7 +57,7 @@ class SpeedState: ActionState
         super.stop()
     }
     
-    override func step(dt: Float) {
+    override func step(dt: TimeInterval) {
         innerActionState.step(dt: dt * speed)
     }
 }

@@ -10,7 +10,7 @@ import RealityKit
 
 /// Easing function: ease-in
 public class EaseIn: EaseRateAction {
-    public override init (_ action: FiniteTimeAction, rate: Float) {
+    public override init (_ action: FiniteTimeAction, rate: Double) {
         super.init(action, rate: rate)
     }
     
@@ -28,7 +28,7 @@ class EaseInState: EaseRateActionState {
         super.init(action: action, target: target)
     }
     
-    override func update(time: Float) {
-        innerActionState.update (time: powf(time, rate))
+    override func update(time: Double) {
+        innerActionState.update (time: pow(time, rate))
     }
 }

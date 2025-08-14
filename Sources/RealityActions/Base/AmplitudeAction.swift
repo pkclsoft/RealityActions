@@ -10,12 +10,12 @@ import RealityKit
 
 class AmplitudeAction: FiniteTimeAction
 {
-    public var amplitude: Float = 0
+    public var amplitude: Double = 0
 }
 
 class AmplitudeActionState: FiniteTimeActionState {
-    var amplitude: Float
-    var amplitudeRate: Float
+    var amplitude: Double
+    var amplitudeRate: Double
     
     init (action: AmplitudeAction, target: Entity) {
         amplitude = action.amplitude

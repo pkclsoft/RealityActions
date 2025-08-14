@@ -10,7 +10,7 @@ import RealityKit
 
 /// Moves a Node object to a parabolic position simulating a jump movement by modifying it's position attribute.
 public class JumpTo: JumpBy {
-    public override init (duration: Float, position: SIMD3<Float>, height: Float, jumps: Int) {
+    public override init (duration: TimeInterval, position: SIMD3<Float>, height: Double, jumps: Int) {
         super.init(duration: duration, position: position, height: height, jumps: jumps)
     }
     

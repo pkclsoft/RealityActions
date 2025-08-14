@@ -45,7 +45,7 @@ class ActionEaseState : FiniteTimeActionState {
         super.stop()
     }
     
-    override func update(time: Float) {
+    override func update(time: Double) {
         innerActionState.update (time: time)
     }
 }

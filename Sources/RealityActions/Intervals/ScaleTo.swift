@@ -16,7 +16,7 @@ public class ScaleTo: FiniteTimeAction {
     /// - Parameters:
     ///   - duration: The duration for the scaling process
     ///   - scale: The desired scale, represented as a vector for the X, Y and Z components
-    public init (duration: Float, scale: SIMD3<Float>) {
+    public init (duration: TimeInterval, scale: SIMD3<Float>) {
         self.finalScale = scale
         super.init(duration: duration)
     }
@@ -25,7 +25,7 @@ public class ScaleTo: FiniteTimeAction {
     /// - Parameters:
     ///   - duration: The duration for the scaling process
     ///   - scale: The desired scale which is applied uniformly to the x, y and z components
-    public convenience init (duration: Float, scale: Float) {
+    public convenience init (duration: TimeInterval, scale: Float) {
         self.init (duration: duration, scale: SIMD3<Float> (scale, scale, scale))
     }
     
@@ -53,8 +53,8 @@ class ScaleToState: FiniteTimeActionState {
         super.init(action: action, target: target)
     }
     
-    override func update(time: Float) {
+    override func update(time: Double) {
         guard let target else { return }
-        target.transform.scale = startScale + delta * time
+        target.transform.scale = startScale + delta * Float(time)
     }
 }

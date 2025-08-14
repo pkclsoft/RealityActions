@@ -8,19 +8,32 @@
 import Foundation
 import RealityKit
 
-/// Rotates the transformation of the target by the specified degrees
+/// Rotates the transformation of the target by the specified radians
 public class RotateBy: FiniteTimeAction {
+    
+    // The angle in radians
     let deltaAngles: SIMD3<Float>
     
+    let deg2radians: Float = .pi / 180
+
     /// Creates a rotation
     /// - Parameters:
     ///   - duration: time for the rotation to take place
-    ///   - deltaAngles: this vector contains the angle values in X, Y and Z that you want to perform
-    public init (duration: Float, deltaAngles: SIMD3<Float>) {
-        self.deltaAngles = deltaAngles
+    ///   - deltaAngles: this vector contains the angle values in X, Y and Z in degrees that you want to perform
+    public init (duration: TimeInterval, deltaAngles: SIMD3<Float>) {
+        self.deltaAngles = deltaAngles * deg2radians
         super.init(duration: duration)
     }
-    
+
+    /// Creates a rotation
+    /// - Parameters:
+    ///   - duration: time for the rotation to take place
+    ///   - deltaAngles: this vector contains the angle values in X, Y and Z i radians that you want to perform
+    public init (duration: TimeInterval, deltaAnglesRad: SIMD3<Float>) {
+        self.deltaAngles = deltaAnglesRad
+        super.init(duration: duration)
+    }
+
     override func startAction(target: Entity) -> ActionState? {
         RotateByState (action: self, target: target, deltaAngles: deltaAngles)
     }
@@ -42,12 +55,10 @@ class RotateByState: FiniteTimeActionState {
         self.deltaAngles = deltaAngles
         super.init(action: action, target: target)
     }
-    
-    let deg2radians2: Float = .pi / 360
-    
-    override func update(time: Float) {
+
+    override func update(time: Double) {
         guard let target else { return }
-        let newRot = startRotation * quaternionFromEuler(angles: deltaAngles * time)
+        let newRot = startRotation * quaternionFromEuler(angles: deltaAngles * Float(time))
         target.transform.rotation = newRot.normalized
     }
 }

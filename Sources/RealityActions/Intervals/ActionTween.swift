@@ -21,7 +21,7 @@ public class ActionTween: FiniteTimeAction {
     ///   - from: Initial value
     ///   - to: Final value
     ///   - tweenAction: The callback that will be invoked repeatedly with the computed value in the range `from`..`to` interpolated into the duration.
-    public init (duration: Float, from: Float, to: Float, tweenAction: @escaping (Float)->())
+    public init (duration: TimeInterval, from: Float, to: Float, tweenAction: @escaping (Float)->())
     {
         self.to = to
         self.from = from
@@ -49,8 +49,8 @@ class ActionTweenState : FiniteTimeActionState
         super.init (action: action, target: target)
     }
     
-    override func update(time: Float) {
-        let amt = at.to - delta * (1 - time)
+    override func update(time: Double) {
+        let amt = at.to - delta * Float(1 - time)
         at.tweenAction (amt)
     }
 }
