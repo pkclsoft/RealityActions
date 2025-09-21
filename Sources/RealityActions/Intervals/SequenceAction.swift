@@ -73,8 +73,8 @@ public class SequenceAction: FiniteTimeAction {
     }
 }
 
-var said = 0
 class SequenceActionState: FiniteTimeActionState {
+
     enum ActiveAction {
         case none
         case first
@@ -89,8 +89,7 @@ class SequenceActionState: FiniteTimeActionState {
     var id: Int
     
     init(action: SequenceAction, target: Entity) {
-        id = said
-        said += 1
+        id = SequenceActionStateGlobal.shared.nextSequenceActionID()
         self.cancel = action.cancel
         action1 = action.action1
         action2 = action.action2
