@@ -21,13 +21,16 @@ public class ActionManagerSystem : System {
 
 
     public func update(context: SceneUpdateContext) {
-        globalActionManager.update(dt: context.deltaTime)
+        ActionManager.shared.update(dt: context.deltaTime)
     }
 }
 
 /// This class manages the running actions.
 /// Actions are started from the extension methods on the Entity to start actions.
 public class ActionManager {
+    
+    nonisolated(unsafe) static let shared : ActionManager = ActionManager()
+    
     class HashElement {
         var actionIndex: Int = 0
         var actionStates: [ActionState] = []
